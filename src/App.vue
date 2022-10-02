@@ -1,34 +1,38 @@
 <script setup>
-import BootcampLogo from "./assets/svg/BootcampLogo.vue"
-import HelloWorld from './components/HelloWorld.vue'
+import InputFullName from "@/components/Inputs/InputFullName.vue";
+import InputMail from "@/components/Inputs/InputMail.vue";
+import InputPhone from "@/components/Inputs/InputPhone.vue";
+import InputPassword from "@/components/Inputs/InputPassword.vue";
+import RegisterButton from "@/components/Buttons/RegisterButton.vue";
+import LoginButton from "@/components/Buttons/LoginButton.vue";
+
+import { ref } from "vue";
+const isLogin = ref(true);
+const fullName = ref("");
+const email = ref("");
+// const registerInfo = ref({
+// 	fullName: null,
+// 	email: null,
+// 	phone: null,
+// 	password: null,
+// });
 </script>
 
 <template>
-	<div>
-		<BootcampLogo />
-		<br />
-		<a href="https://vitejs.dev" target="_blank">
-			<img src="/vite.svg" class="logo" alt="Vite logo" />
-		</a>
-		<a href="https://vuejs.org/" target="_blank">
-			<img src="/vue.svg" class="logo vue" alt="Vue logo" />
-		</a>
-	</div>
-	<HelloWorld msg="Vite + Vue" />
+	{{ fullName }} {{ email }}
+	<form @submit.prevent="isLogin">
+		<template v-if="isLogin === true">
+			<InputFullName v-model:name="fullName" />
+			<InputMail v-model:email="email" />
+			<InputPhone />
+			<InputPassword />
+			<InputPassword />
+			<RegisterButton />
+		</template>
+		<template v-else>
+			<InputMail />
+			<InputPassword />
+			<LoginButton />
+		</template>
+	</form>
 </template>
-
-<style scoped>
-.logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-}
-
-.logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
